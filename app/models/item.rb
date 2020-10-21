@@ -8,14 +8,17 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   #has_one :deal
-
-  validates :name,           presence: true, length: { maximum: 40 }
-  validates :description,    presence: true, length: { maximum: 1000 }
-  validates :price,          presence: true, inclusion: {in: 300..9999999 }, format:{ with:/A[0-9]+Z/}
-  validates :image,          presence: true
-  validates :category_id,    presence: true,numericality: { other_than: 1 }
-  validates :status_id,      presence: true,numericality: { other_than: 1 }
-  validates :shipping_id,    presence: true,numericality: { other_than: 1 }
-  validates :prefecture_id,  presence: true,numericality: { other_than: 1 }
-  validates :scheduled_id,   presence: true,numericality: { other_than: 1 }
+  with_options presence: true do
+   validates :name,           length: { maximum: 40 }
+   validates :description,    length: { maximum: 1000 }
+   validates :price,          numericality:{greater_than: 300, less_than: 10000000}, format:{ with:/A[0-9]+Z/}
+   validates :image
+   with_options  numericality: { other_than: 1 } do
+     validates :category_id
+     validates :status_id
+     validates :shipping_id
+     validates :prefecture_id
+     validates :scheduled_id
+   end
+  end
 end

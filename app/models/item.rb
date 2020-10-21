@@ -11,10 +11,15 @@ class Item < ApplicationRecord
 
   validates :name,           presence: true, length: { maximum: 40 }
   validates :description,    presence: true, length: { maximum: 1000 }
-  validates :category_id,    numericality: { other_than: 1 }
-  validates :status_id,      numericality: { other_than: 1 }
-  validates :shipping_id,    numericality: { other_than: 1 }
-  validates :prefecture_id,  numericality: { other_than: 1 }
-  validates :scheduled_id,   numericality: { other_than: 1 }
-  
+  validates :price,          presence: true, if: :fair_price?, format:{ with:/A[0-9]+Z/}
+  validates :image,          presence: true
+  validates :category_id,    presence: true,numericality: { other_than: 1 }
+  validates :status_id,      presence: true,numericality: { other_than: 1 }
+  validates :shipping_id,    presence: true,numericality: { other_than: 1 }
+  validates :prefecture_id,  presence: true,numericality: { other_than: 1 }
+  validates :scheduled_id,   presence: true,numericality: { other_than: 1 }
+
+  def fair_price?
+    price > 300 && price < 99999999
+  end
 end

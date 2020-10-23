@@ -21,7 +21,13 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
   end
-
+  
+  def destroy
+    item = Item.find(params[:id])
+    if item.destroy
+      redirect_to action: :index
+    end
+  end
 
   private
 

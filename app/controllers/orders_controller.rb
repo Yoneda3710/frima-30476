@@ -15,6 +15,10 @@ class OrdersController < ApplicationController
     params.permit.merge(user_id: user.id, item_id: item.id)
   end
 
+  def address_params
+    params.premit(:postal_code, :prefectures_id, :municipality, :address, :building, :phone_number).merge(order_id: order.id)
+  end
+
 
 
 end

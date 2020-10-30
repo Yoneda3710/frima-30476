@@ -9,5 +9,6 @@ FactoryBot.define do
     kana_family_name      {"ヤマダ"}
     kana_first_name       {"タロウ"}
     birthday              {"1989.1.1"}
+    id                    {Faker::Number.number(digits: 1)}
   end
 end

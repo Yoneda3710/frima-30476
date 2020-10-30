@@ -8,6 +8,7 @@ FactoryBot.define do
     scheduled_id{2}
     shipping_id{2}
     status_id{2}
+    id{Faker::Number.number(digits: 1)}
     association :user
     after(:build) do |item|
       item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')

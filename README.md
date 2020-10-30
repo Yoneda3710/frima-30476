@@ -15,7 +15,7 @@
 | birthday         | date   | null: false |
 ### Association
 - has_many :items
-- has_many :deals
+- has_many :orders
 
 
 ## items テーブル
@@ -33,7 +33,7 @@
 | user          | references    | null: false, foreign_key: true       | 
 ### Association
 - belongs_to :user
-- has_one :deal
+- has_one :order
 
 ## address テーブル
 
@@ -45,12 +45,12 @@
 | address          | string     | null: false                      |
 | building         | string     |                                  |
 | phone_number     | string     | null: false                      |
-| deal             | references | null: false, foreign_key: true   |
+| order            | references | null: false, foreign_key: true   |
 ### Association
-- belongs_to :deal
+- belongs_to :order
 
 
-## deals テーブル
+## orders テーブル
 
 | Column        | Type    | Options                                |
 | ------------- | ------- | -------------------------------------- |

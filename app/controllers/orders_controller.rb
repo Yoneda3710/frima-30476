@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   before_action :redirect
-  before_action :redirects
   before_action :set_order, only:[:index, :create]
-
+  before_action :redirects
+  
 
   def index
     if @order.order != nil
@@ -29,7 +29,6 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    @order = Item.find(params[:item_id])
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: @order.price, 
@@ -45,7 +44,6 @@ class OrdersController < ApplicationController
   end
   
   def redirects
-    @order = Item.find(params[:item_id])
     if current_user.id == @order.user_id
       redirect_to root_path
     end

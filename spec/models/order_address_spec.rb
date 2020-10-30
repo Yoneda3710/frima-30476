@@ -26,7 +26,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order.errors.full_messages).to include("Postal code can't be blank")
       end
       it "郵便番号に(-)が含まれていないと登録できない" do
-        @order.postal_code = 3333333
+        @order.postal_code = "3333333"
         @order.valid?
         expect(@order.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
       end
@@ -51,12 +51,12 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order.errors.full_messages).to include("Phone number can't be blank")
       end
       it "phone_numberが1２文字以上だと登録できない" do
-        @order.phone_number = 2222222222222
+        @order.phone_number = "2222222222222"
         @order.valid?
         expect(@order.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
       end
       it "phone_numberに(-)が含まれると登録できない" do
-        @order.phone_number = 222-222555
+        @order.phone_number = "222-222555"
         @order.valid?
         expect(@order.errors.full_messages).to include("Phone number is invalid")
       end
